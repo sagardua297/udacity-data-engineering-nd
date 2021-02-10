@@ -105,8 +105,14 @@ Followed GIT [repo](https://github.com/andresionek91/airflow-autoscaling-ecs) to
 
 ## Data Pipeline Execution
 
-Ensure Airflow Webserver and Scheduler are running. Airflow UI can be accessed using: 
-http://<ip-address>:<configured-port>
+Ensure Airflow Webserver and Scheduler are running. Airflow UI can be accessed using http://<ip-address>:<configured-port>.
+
+Below diagrams depicts Data Pipeline Airflow DAG.
+
+<a href=""><img src="images/aws_airflow_1.png" align="centre" height="200" width="2000"></a>
+
+
+<a href=""><img src="images/AirflowDAG.png" align="centre" height="300" width="3500"></a>
 
 ## Scenarios
 
