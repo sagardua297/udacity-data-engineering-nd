@@ -1,6 +1,7 @@
 # Data Pipeline Analytics
-<a href=""><img src="images/Header.png" align="left" height="300" width="500"></a>
+<a href=""><img src="images/Header.png" align="centre" height="400" width="700"></a>
 
 ## Architecture
 
-Test
+<a href=""><img src="images/Architecture_1.png" align="centre" height="500" width="1200"></a>
+
