@@ -76,13 +76,26 @@ Create a Redshift cluster using AWS UI. Ensure to select below details during cl
 2. Enter Database Name and Master User Name or choose default values.
 3. Enter Master User Password.
 4. Under Cluster Permissions -> Select IAM Role from the list -> Click "Add IAM Role". 
-5. Click "Create Cluster"
+5. Click "Create Cluster".
 
 Below diagram depicts Redshift cluster created in AWS.
 
 <a href=""><img src="images/aws_redshift_datawarehouse.png" align="centre" height="200" width="900"></a>
 
 ### AWS EMR Cluster
+
+Create a EMR cluster using AWS UI. Ensure to select below details during cluster creation.
+1. Enter Cluster name or choose default value.
+2. Choose Release "emr-5.20.0". 
+3. Select Applications "Spark: Spark 2.4.0 on Hadoop 2.8.5 YARN with Ganglia 3.7.2 and Zeppelin 0.8.0".
+4. Choose Instance Type "m3.xlarge".
+5. Enter Number of Instances "2".
+6. Select EC2 key pair with already created key-pair.
+7. Click "Create Cluster".
+
+Below diagram depicts EMR cluster created in AWS.
+
+<a href=""><img src="images/aws_emr_cluster.png" align="centre" height="150" width="700"></a>
 
 ### Apache Airflow
 
