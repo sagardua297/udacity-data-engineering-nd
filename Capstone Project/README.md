@@ -103,6 +103,14 @@ Confifure Apache Airflow instance either on local setup or on AWS EC2 instance.
 
 Followed GIT [repo](https://github.com/andresionek91/airflow-autoscaling-ecs) to setup Airflow.
 
+## Data Dictionary
+
+Data model consists of 2 schemas in Redshift warehouse. One schema is used for storing Staging data, and the other schema for storing Analytics data.
+
+Refer to below links for more information on the data model for the 2 schemas.
+1. Staging Schema
+2. Analytics Schema
+
 ## Data Pipeline Execution
 
 Ensure Airflow Webserver and Scheduler are running. Airflow UI can be accessed using http://<ip-address>:<configured-port>.
@@ -116,12 +124,12 @@ Below diagrams depicts Data Pipeline Airflow DAG.
 
 ## Scenarios
 
-1. Data increase by 100x. read > write. write > read
+1. If the database size was increased by 100X:
 
 
-2. Pipelines would be run on 7am daily. how to update dashboard? would it still work?
+2. To update the database every morning at 7am:
 
 
-3. Make it available to 100+ people
+3. If the database needed to be accessed by 100+ people:
 
 
