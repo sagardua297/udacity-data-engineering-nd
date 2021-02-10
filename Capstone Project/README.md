@@ -1,4 +1,2 @@
 # Data Pipeline Analytics
-![](images/Header.png)
-
-## Architecture
+<a href=""><img src="images/Header.png" align="left" height="300" width="500"></a>
