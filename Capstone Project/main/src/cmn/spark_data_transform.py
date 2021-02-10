@@ -1,11 +1,8 @@
 from pyspark.sql.types import StringType
 from pyspark.sql import functions as fn
 import datapipeline_udf
-import logging
 import configparser
 from pathlib import Path
-
-logger = logging.getLogger(__name__)
 
 config = configparser.ConfigParser()
 config.read_file(open(f"{Path(__file__).parents[0]}/s3_config.cfg"))
@@ -28,7 +25,6 @@ class DataPiplelineTransform:
         """
         Transform operations on the Authors dataset.
         """
-        logging.debug("Inside transform author dataset module")
         author_df = \
             self._spark.read.csv( self._load_path + '/author.csv', header=True, mode='PERMISSIVE',inferSchema=True)
 
@@ -42,7 +38,6 @@ class DataPiplelineTransform:
                             .select(author_df.columns) \
                             .withColumn('name', datapipeline_udf.remove_extra_spaces('name'))
 
-        logging.debug(f"Attempting to write data to {self._save_path + '/authors/'}")
         deduped_author_df\
             .repartition(10)\
             .write\
@@ -52,7 +47,6 @@ class DataPiplelineTransform:
         """
         Transform operations on the Reviews dataset.
         """
-        logging.debug("Inside transform reviews dataset module")
         reviews_df = self._spark.read \
                     .csv(self._load_path + '/reviews.csv', header=True, \
                             mode = 'PERMISSIVE', inferSchema=True, quote = "\"", escape = "\"")
@@ -72,8 +66,6 @@ class DataPiplelineTransform:
             .withColumn('review_added_date', datapipeline_udf.stringtodatetime('review_added_date')) \
             .withColumn('review_updated_date', datapipeline_udf.stringtodatetime('review_updated_date'))
 
-
-        logging.debug(f"Attempting to write data to {self._save_path + '/reviews/'}")
         deduped_reviews_df\
             .repartition(10)\
             .write\
@@ -83,7 +75,6 @@ class DataPiplelineTransform:
         """
         Transform operations on the Books dataset.
         """
-        logging.debug("Inside transform books dataset module")
         books_df = self._spark.read.csv(self._load_path + '/book.csv', header=True, mode='PERMISSIVE',
                                   inferSchema=True, quote="\"", escape="\"")
 
@@ -97,7 +88,6 @@ class DataPiplelineTransform:
                            .join(books_lookup_df, ['book_id', 'create_timestamp'], how='inner')\
                            .select(books_df.columns)
 
-        logging.debug(f"Attempting to write data to {self._save_path + '/books/'}")
         deduped_books_df\
             .repartition(10)\
             .write\
@@ -107,7 +97,6 @@ class DataPiplelineTransform:
         """
         Transform operations on the Users dataset.
         """
-        logging.debug("Inside transform users dataset module")
         users_df = self._spark.read.csv(self._load_path + '/user.csv', header=True, mode='PERMISSIVE',
                                   inferSchema=True, quote="\"", escape="\"")
 
@@ -122,7 +111,6 @@ class DataPiplelineTransform:
                            .join(users_lookup_df, ['user_id', 'create_timestamp'], how='inner')\
                            .select(users_df.columns)
 
-        logging.debug(f"Attempting to write data to {self._save_path + '/users/'}")
         deduped_users_df\
             .repartition(10)\
             .write\
