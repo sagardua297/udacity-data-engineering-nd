@@ -33,7 +33,7 @@ This automates the ETL jobs written in Spark. ETL jobs can be scheduled as per r
 
 ### Data Pipeline Architecture
 
-Data is provided as input in the form of CSV files obtained from Kaggle. Input data is stored on local disk and then moved to the Ground Store Bucket on AWS S3. 
+Data is provided as input in the form of CSV files obtained from [Kaggle](https://www.kaggle.com/san089/goodreads-dataset). Input data is stored on local disk and then moved to the Ground Store Bucket on AWS S3. 
 ETL jobs are written in Spark and scheduled in Airflow to run every 10 minutes to process the input data in Ground Store bucket, and move them to Final Store bucket, from where data is stored into Redshift data warehouse for final processing and running analytic queries.
 
 Below diagram depicts the architecture:
@@ -95,9 +95,13 @@ Create a EMR cluster using AWS UI. Ensure to select below details during cluster
 
 Below diagram depicts EMR cluster created in AWS.
 
-<a href=""><img src="images/aws_emr_cluster.png" align="centre" height="150" width="700"></a>
+<a href=""><img src="images/aws_emr_cluster.png" align="centre" height="100" width="750"></a>
 
 ### Apache Airflow
+
+Confifure Apache Airflow instance either on local setup or on AWS EC2 instance.
+
+Followed GIT [repo](https://github.com/andresionek91/airflow-autoscaling-ecs) to setup Airflow.
 
 ## Data Pipeline Execution
 
