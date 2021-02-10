@@ -65,13 +65,22 @@ Create three buckets using AWS UI. Ensure bucket has Public access.
 2. Processing Store
 3. Final Store
 
-Below diagram depicts buckets created in AWS.
+Below diagram depicts S3 buckets created in AWS.
 
-<a href=""><img src="images/aws_s3_buckets.png" align="centre" height="300" width="1400"></a>
+<a href=""><img src="images/aws_s3_buckets.png" align="centre" height="300" width="800"></a>
 
 ### AWS Redshift
 
-Create a Redshift cluster using AWS UI. 
+Create a Redshift cluster using AWS UI. Ensure to select below details during cluster creation.
+1. Choose Free Trial.
+2. Enter Database Name and Master User Name or choose default values.
+3. Enter Master User Password.
+4. Under Cluster Permissions -> Select IAM Role from the list -> Click "Add IAM Role". 
+5. Click "Create Cluster"
+
+Below diagram depicts Redshift cluster created in AWS.
+
+<a href=""><img src="images/aws_redshift_datawarehouse.png" align="centre" height="200" width="900"></a>
 
 ### AWS EMR Cluster
 
