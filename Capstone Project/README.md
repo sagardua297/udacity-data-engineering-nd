@@ -105,6 +105,9 @@ Followed GIT [repo](https://github.com/andresionek91/airflow-autoscaling-ecs) to
 
 ## Data Pipeline Execution
 
+Ensure Airflow Webserver and Scheduler are running. Airflow UI can be accessed using: 
+http://<ip-address>:<configured-port>
+
 ## Scenarios
 
 1. Data increase by 100x. read > write. write > read
