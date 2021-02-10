@@ -58,6 +58,8 @@ done on some selected Analytics Table.
 
 ### AWS S3
 
+Create 
+
 ### AWS Redshift
 
 ### AWS EMR Cluster
