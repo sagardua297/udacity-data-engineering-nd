@@ -40,17 +40,19 @@ Below diagram depicts the architecture:
 
 ### Data Pipeline Flow
 
-1. Data Collected from the API is moved to landing zone s3 buckets.
-2. ETL job has s3 module which copies data from landing zone to working zone.
-3. Once the data is moved to working zone, spark job is triggered which reads the data from working zone and apply transformation. 
-4. Dataset is repartitioned and moved to the Processed Zone.
-5. Warehouse module of ETL jobs picks up data from processed zone and stages it into the Redshift staging tables.
-6. Using the Redshift staging tables and UPSERT operation is performed on the Data Warehouse tables to update the dataset.
-7. ETL job execution is completed once the Data Warehouse is updated.
+Below are steps undertaken during the Data Pipeline flow:
+
+1. Input data files are placed in Ground Store S3 bucket.
+2. S3 module of ETL Spark job copies data from Ground Store bucket to Processing Store bucket.
+3. Once the data is moved to Processing Store bucket, Spark job is triggered which reads the data from Processing Store bucket and applies transformation. 
+4. Dataset is repartitioned and moved to the Final Store bucket.
+5. Warehouse module of ETL Spark job picks up data from Final Store bucket and stages it into the Redshift staging tables.
+6. Using the Redshift staging tables, UPSERT operation is performed on the Data Warehouse tables to update the dataset.
+7. ETL job execution is successfully completed once the Data Warehouse is updated.
 8. Airflow DAG runs the data quality check on all Warehouse tables once the ETL job execution is completed.
 9. Airflow DAG has Analytics queries configured in a Custom Designed Operator. These queries are run and again a Data Quality Check is 
 done on some selected Analytics Table.
-10. Dag execution completes after these Data Quality check.
+10. DAG execution completes after these Data Quality check.
 
 ## Host Environment Setup
 
