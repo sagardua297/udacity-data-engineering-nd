@@ -67,3 +67,15 @@ Create
 ### Apache Airflow
 
 ## Data Pipeline Execution
+
+## Scenarios
+
+1. Data increase by 100x. read > write. write > read
+
+
+2. Pipelines would be run on 7am daily. how to update dashboard? would it still work?
+
+
+3. Make it available to 100+ people
+
+
