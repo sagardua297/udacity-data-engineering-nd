@@ -7,7 +7,7 @@ from pathlib import Path
 config = configparser.ConfigParser()
 config.read_file(open(f"{Path(__file__).parents[0]}/s3_config.cfg"))
 
-class DataPiplelineTransform:
+class DataPipelineTransform:
     """
     This class performs the following transformation operations on the dataset:
         1. Transform timestamp format, clean text part, remove extra spaces etc.
