@@ -52,7 +52,7 @@ def main():
     time.sleep(5)
 
     # Execute Warehouse logic
-    grwarehouse = DataPipelineWarehouseDriver()
+    grwarehouse = DataPipelineWarehouse()
     grwarehouse.setup_staging_tables()
     grwarehouse.load_staging_tables()
     grwarehouse.setup_warehouse_tables()
