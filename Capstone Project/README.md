@@ -18,18 +18,15 @@ Three S3 buckets will be used in the project:
 
 <b>2. AWS EMR Cluster</b>
 
-Performs ETL using cluster to process input data files in Ground Store S3 bucket, and moves the transformed data to Redshift data warehouse Staging tables for further processing.
+Involves running spark jobs to process and transform input data, move data to various schemas in warehouse to enable analytical processing of data.
 
 <b>3. AWS Redshift</b>
 
-Processed data from Final Store bucket is moved to Staging tables Redshift data warehouse by EMR cluster.
-
-Post data validation/transformation, data is now available for analytics in Redshift data warehouse scehema.
-There are separate schemas for storing Staging, Transformed Staging (or Warehouse) and Analytic tables in Redshift data warehouse.
+Contains the schemas - Staging, Warehouse, Analytics to store, process and transform the input data to be ready for end-user processing.
 
 <b>4. Apache Airflow</b>
 
-This automates the ETL jobs written in Spark. ETL jobs can be scheduled as per requirement.
+This automates the ETL jobs written in Spark. ETL jobs exeuction can be scheduled as per requirement.
 
 ### Data Pipeline Architecture
 
