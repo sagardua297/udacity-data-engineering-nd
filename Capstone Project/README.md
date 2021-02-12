@@ -7,7 +7,7 @@
 
 Below are high level components of the project:
 
-1. AWS S3
+<b>1. AWS S3</b>
 
 Input data files will be stored in S3 buckets.
 
@@ -16,18 +16,18 @@ a) Ground Store: This bucket stores the input data files.
 b) Processintg Store: This bucket stores processed data from input data files present in Ground Store.
 c) Final Store: This bucket stores final version of processed input data, ready to be taken to Redshift data warehouse for further processing.
 
-2. AWS EMR Cluster
+<b>2. AWS EMR Cluster</b>
 
 Performs ETL using cluster to process input data files in Ground Store S3 bucket, and moves the transformed data to Redshift data warehouse Staging tables for further processing.
 
-3. AWS Redshift
+<b>3. AWS Redshift</b>
 
 Processed data from Final Store bucket is moved to Staging tables Redshift data warehouse by EMR cluster.
 
 Post data validation/transformation, data is now available for analytics in Redshift data warehouse scehema.
 There are separate schemas for storing Staging and Analytic tables in Redshift data warehouse.
 
-4. Apache Airflow
+<b>4. Apache Airflow</b>
 
 This automates the ETL jobs written in Spark. ETL jobs can be scheduled as per requirement.
 
