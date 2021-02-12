@@ -105,9 +105,9 @@ Followed GIT [repo](https://github.com/andresionek91/airflow-autoscaling-ecs) to
 
 ## Data Dictionary
 
-Data model consists of 2 schemas in Redshift warehouse. One schema is used for storing Staging data, and the other schema for storing Analytics data.
+Data model consists of 3 schemas in Redshift warehouse. 
 
-Refer to below links for more information on the data model for the 2 schemas.
+Following provides more information on the 3 schemas.
 1. Staging Schema
 - Input data files from Ground Store bucket are stored in Staging schema tables.
 - [Data dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/staging_schema.xlsx)
@@ -132,9 +132,11 @@ Below diagrams depicts Data Pipeline Airflow DAG.
 ## Scenarios
 
 1. If the database size was increased by 100X:
-
+- Redshift cluster is already optimized for read heavy workloads. Volume of data will not be a problem here.
+- Need to increase EMR cluster size with higher volumes.
 
 2. To update the database every morning at 7am:
-
+- Schedule for DAG execution can be modified to run every morning at 7am.
 
 3. If the database needed to be accessed by 100+ people:
+- Redshift cluster concurrecy limits can be scaled based on requirement.
