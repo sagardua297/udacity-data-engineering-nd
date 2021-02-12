@@ -109,7 +109,14 @@ Data model consists of 2 schemas in Redshift warehouse. One schema is used for s
 
 Refer to below links for more information on the data model for the 2 schemas.
 1. Staging Schema
-2. Analytics Schema
+- Input data files from Ground Store bucket are stored in Staging schema tables.
+- [Data dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/staging_schema.xlsx)
+2. Warehouse Schema 
+- Data from Staging schema is moved to Processing Store bucket from Ground Store bucket. It is then transformed, re-partitioned and stored in Warehouse schema tables.
+- [Data Dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/warehouse_schema.xlsx)
+3. Analytics Schema
+- Data from Final Store bucket is processed and stored in analytic tables in Analytics schema.
+- [Data Dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/analytics_schema.xlsx)
 
 ## Data Pipeline Execution
 
@@ -131,5 +138,3 @@ Below diagrams depicts Data Pipeline Airflow DAG.
 
 
 3. If the database needed to be accessed by 100+ people:
-
-
