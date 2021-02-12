@@ -12,9 +12,9 @@ Below are high level components of the project:
 Input data files will be stored in S3 buckets.
 
 Three S3 buckets will be used in the project:
-a) Ground Store: This bucket stores the input data files.
-b) Processintg Store: This bucket stores processed data from input data files present in Ground Store.
-c) Final Store: This bucket stores final version of processed input data, ready to be taken to Redshift data warehouse for further processing.
+- Ground Store: This bucket stores the input data files.
+- Processintg Store: This bucket stores processed data from input data files present in Ground Store.
+- Final Store: This bucket stores final version of processed input data, ready to be taken to Redshift data warehouse for further processing.
 
 <b>2. AWS EMR Cluster</b>
 
