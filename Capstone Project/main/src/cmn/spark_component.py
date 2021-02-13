@@ -33,7 +33,7 @@ def main():
         "author.csv" : dpat.transform_author_dataset,
         "book.csv" : dpat.transform_books_dataset,
         "reviews.csv" : dpat.transform_reviews_dataset,
-        "user.csv" : dpat.tranform_users_dataset
+        "user.csv" : dpat.transform_users_dataset
     }
 
     dpas3 = DataPipelineS3Module()
