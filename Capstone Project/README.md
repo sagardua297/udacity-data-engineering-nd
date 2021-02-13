@@ -36,7 +36,7 @@ This automates the ETL jobs written in Spark. ETL jobs exeuction can be schedule
 
 Below diagram depicts the architecture:
 
-<a href=""><img src="images/Architecture_1.png" align="centre" height="515" width="1300"></a>
+<a href=""><img src="images/Architecture_1.png" align="centre" height="515" width="1600"></a>
 
 ### Data Pipeline Flow
 
