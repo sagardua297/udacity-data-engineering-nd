@@ -3,7 +3,7 @@
 
 ## Platform Architecture
 
-### Data Pipeline Components
+### Data Pipeline  Components
 
 Below are high level components of the project:
 
@@ -28,7 +28,7 @@ Contains the schemas - Staging, Warehouse, Analytics to store, process and trans
 
 This automates the ETL jobs written in Spark. ETL jobs exeuction can be scheduled as per requirement.
 
-### Data Pipeline Architecture
+### Platform Architecture
 
 - Data is provided as input in the form of CSV files obtained from [Kaggle](https://www.kaggle.com/san089/goodreads-dataset). 
 - Input data is stored on local disk and then moved to the Ground Store Bucket on AWS S3. 
@@ -36,7 +36,7 @@ This automates the ETL jobs written in Spark. ETL jobs exeuction can be schedule
 
 Below diagram depicts the architecture:
 
-<a href=""><img src="images/Architecture_1.png" align="centre" height="500" width="1200"></a>
+<a href=""><img src="images/Architecture_1.png" align="centre" height="515" width="1191"></a>
 
 ### Data Pipeline Flow
 
