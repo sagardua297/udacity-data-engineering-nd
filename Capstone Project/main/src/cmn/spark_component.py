@@ -24,12 +24,12 @@ def main():
     This method performs below tasks:
         1: Check for data in Ground Store, if new files are present move them to Processing Store.
         2: Transform data present in Processing Store and save the transformed data to Final Store.
-        3: Run Data Warehouse functionality by setting up Staging tables, then loading staging tables, performing upsert operations on warehouse.
+        3: Run Data Warehouse functionality by setting up Staging and Warehouse tables, then loading staging and warehouse tables, and finally performing upsert operations on warehouse tables.
     """
     spark = create_sparksession()
     dpat = DataPipelineTransform(spark)
 
-    modules = {
+    mod_list = {
         "author.csv" : dpat.transform_author_dataset,
         "book.csv" : dpat.transform_books_dataset,
         "reviews.csv" : dpat.transform_reviews_dataset,
@@ -42,12 +42,12 @@ def main():
     files_in_processing_store = dpas3.get_files(config.get('BUCKET', 'PROCESSING_STORE'))
 
     # Cleanup Final Store bucket if files available in Processing Store
-    if len([set(modules.keys()) & set(files_in_processing_store)]) > 0:
+    if len([set(mod_list.keys()) & set(files_in_processing_store)]) > 0:
         dpas3.clean_bucket(config.get('BUCKET', 'FINAL_STORE'))
 
     for file in files_in_processing_store:
-        if file in modules.keys():
-            modules[file]()
+        if file in mod_list.keys():
+            mod_list[file]()
 
     time.sleep(5)
 
