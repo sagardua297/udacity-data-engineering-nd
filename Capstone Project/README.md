@@ -138,16 +138,16 @@ Create below connections from Airflow UI console:
 Data model consists of 3 schemas in Redshift warehouse. Following provides more information on the 3 schemas.
 
 <b>1. Staging Schema</b>
-    - Input data files from Ground Store bucket are stored in Staging schema tables.
-    - [Data dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/staging_schema.xlsx)
+   - Input data files from Ground Store bucket are stored in Staging schema tables.
+   - [Data dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/staging_schema.xlsx)
 
 <b>2. Warehouse Schema</b>
-    - Data from Staging schema is moved to Processing Store bucket from Ground Store bucket. It is then transformed, re-partitioned and stored in Warehouse schema tables.
-    - [Data Dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/warehouse_schema.xlsx)
+   - Data from Staging schema is moved to Processing Store bucket from Ground Store bucket. It is then transformed, re-partitioned and stored in Warehouse schema tables.
+   - [Data Dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/warehouse_schema.xlsx)
 
 <b>3. Analytics Schema</b>
-    - Data from Final Store bucket is processed and stored in analytic tables in Analytics schema.
-    - [Data Dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/analytics_schema.xlsx)
+   - Data from Final Store bucket is processed and stored in analytic tables in Analytics schema.
+   - [Data Dictionary](https://github.com/sagardua297/udacity-data-engineering-nd/blob/main/Capstone%20Project/data_dictionary/analytics_schema.xlsx)
 
 ## Data Pipeline Execution
 
