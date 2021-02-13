@@ -41,9 +41,9 @@ def main():
 
     files_in_processing_store = dpas3.get_files(config.get('BUCKET', 'PROCESSING_STORE'))
 
-    # Cleanup Final Store bucket if files available in Processing Store
+    # Cleanup Processing Store bucket if files available in Processing Store
     if len([set(mod_list.keys()) & set(files_in_processing_store)]) > 0:
-        dpas3.clean_bucket(config.get('BUCKET', 'FINAL_STORE'))
+        dpas3.clean_bucket(config.get('BUCKET', 'PROCESSED_STORE'))
 
     for file in files_in_processing_store:
         if file in mod_list.keys():
