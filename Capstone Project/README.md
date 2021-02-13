@@ -13,7 +13,7 @@ Input data files will be stored in S3 buckets.
 
 Three S3 buckets will be used in the project:
 - <i>Ground Store</i>: This bucket stores the input data files.
-- <i>Processintg Store</i>: Input data from Ground Store bucket is moved to Processing Store bucket. 
+- <i>Processing Store</i>: Input data from Ground Store bucket is moved to Processing Store bucket. 
 - <i>Final Store</i>: This bucket stores final version of processed input data from Processing Store bucket, ready to be taken to Redshift Staging schema tables for further processing.
 
 <b>2. AWS EMR Cluster</b>
