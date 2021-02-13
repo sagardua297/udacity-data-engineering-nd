@@ -33,7 +33,7 @@ emrsshHook= SSHHook(ssh_conn_id='emr_ssh_connection')
 
 jobOperator = SSHOperator(
     task_id="DataPipelineETLJob",
-    command='cd /home/hadoop/data_pipeline_analytics/src;export PYSPARK_DRIVER_PYTHON=python3;export PYSPARK_PYTHON=python3;spark-submit --master yarn spark_component.py;',
+    command='cd /home/hadoop/data_pipeline_analytics/main/src/cmn;export PYSPARK_DRIVER_PYTHON=python3;export PYSPARK_PYTHON=python3;spark-submit --master yarn spark_component.py;',
     ssh_hook=emrsshHook,
     dag=dag)
 
