@@ -27,23 +27,23 @@ def main():
         3: Run Data Warehouse functionality by setting up Staging tables, then loading staging tables, performing upsert operations on warehouse.
     """
     spark = create_sparksession()
-    grt = DataPipelineTransform(spark)
+    dpat = DataPipelineTransform(spark)
 
     modules = {
-        "author.csv" : grt.transform_author_dataset,
-        "book.csv" : grt.transform_books_dataset,
-        "reviews.csv" : grt.transform_reviews_dataset,
-        "user.csv" : grt.tranform_users_dataset
+        "author.csv" : dpat.transform_author_dataset,
+        "book.csv" : dpat.transform_books_dataset,
+        "reviews.csv" : dpat.transform_reviews_dataset,
+        "user.csv" : dpat.tranform_users_dataset
     }
 
-    gds3 = DataPipelineS3Module()
-    gds3.s3_move_data(source_bucket= config.get('BUCKET','GROUND_STORE'), target_bucket= config.get('BUCKET', 'PROCESSING_STORE'))
+    dpas3 = DataPipelineS3Module()
+    dpas3.s3_move_data(source_bucket= config.get('BUCKET','GROUND_STORE'), target_bucket= config.get('BUCKET', 'PROCESSING_STORE'))
 
-    files_in_processing_store = gds3.get_files(config.get('BUCKET', 'PROCESSING_STORE'))
+    files_in_processing_store = dpas3.get_files(config.get('BUCKET', 'PROCESSING_STORE'))
 
     # Cleanup Final Store bucket if files available in Processing Store
     if len([set(modules.keys()) & set(files_in_processing_store)]) > 0:
-        gds3.clean_bucket(config.get('BUCKET', 'FINAL_STORE'))
+        dpas3.clean_bucket(config.get('BUCKET', 'FINAL_STORE'))
 
     for file in files_in_processing_store:
         if file in modules.keys():
@@ -52,11 +52,11 @@ def main():
     time.sleep(5)
 
     # Execute Warehouse logic
-    grwarehouse = DataPipelineWarehouse()
-    grwarehouse.setup_staging_tables()
-    grwarehouse.load_staging_tables()
-    grwarehouse.setup_warehouse_tables()
-    grwarehouse.perform_data_process()
+    dpawarehouse = DataPipelineWarehouse()
+    dpawarehouse.setup_staging_tables()
+    dpawarehouse.load_staging_tables()
+    dpawarehouse.setup_warehouse_tables()
+    dpawarehouse.perform_data_process()
 
 # Entry point for the pipeline
 if __name__ == "__main__":
