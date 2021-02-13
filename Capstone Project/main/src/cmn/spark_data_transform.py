@@ -93,7 +93,7 @@ class DataPipelineTransform:
             .write\
             .csv(path = self._save_path + '/books/', sep = '|', mode='overwrite', compression='gzip', header=True, timestampFormat = 'yyyy-MM-dd HH:mm:ss.SSS', quote = '"', escape = '"')
 
-    def tranform_users_dataset(self):
+    def transform_users_dataset(self):
         """
         Transform operations on the Users dataset.
         """
