@@ -48,7 +48,7 @@ warehouse_data_quality_checks = DataQualityOperator(
 create_analytics_schema = DataAnalyticsOperator(
     task_id='Create_analytics_schema',
     redshift_conn_id = 'redshift',
-    sql_query = [AnalyticQueries.create_schema],
+    sql_query = [AnalyticQueries.create_analytics_schema],
     dag=dag
 )
 
