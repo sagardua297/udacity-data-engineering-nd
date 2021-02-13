@@ -1,7 +1,7 @@
-# Data Pipeline Analytics
+# Data Pipeline Analytics Platform
 <a href=""><img src="images/Header.png" align="centre" height="400" width="700"></a>
 
-## Architecture
+## Platform Architecture
 
 ### Data Pipeline Components
 
@@ -13,12 +13,12 @@ Input data files will be stored in S3 buckets.
 
 Three S3 buckets will be used in the project:
 - <i>Ground Store</i>: This bucket stores the input data files.
-- <i>Processintg Store</i>: This bucket stores processed data from input data files present in Ground Store.
-- <i>Final Store</i>: This bucket stores final version of processed input data, ready to be taken to Redshift data warehouse for further processing.
+- <i>Processintg Store</i>: Input data from Ground Store bucket is moved to Processing Store bucket. Input data is transformed in this bucket
+- <i>Final Store</i>: This bucket stores final version of processed input data, ready to be taken to Redshift data warehouse schema tables for further processing.
 
 <b>2. AWS EMR Cluster</b>
 
-Involves running spark jobs to process and transform input data, move data to various schemas in warehouse to enable analytical processing of data.
+Involves running ETL Spark jobs to process and transform input data, move data to various schemas in warehouse to enable analytical processing of data.
 
 <b>3. AWS Redshift</b>
 
@@ -30,8 +30,9 @@ This automates the ETL jobs written in Spark. ETL jobs exeuction can be schedule
 
 ### Data Pipeline Architecture
 
-Data is provided as input in the form of CSV files obtained from [Kaggle](https://www.kaggle.com/san089/goodreads-dataset). Input data is stored on local disk and then moved to the Ground Store Bucket on AWS S3. 
-ETL jobs are written in Spark and scheduled in Airflow to run every 10 minutes to process the input data in Ground Store bucket, and move them to Final Store bucket, from where data is stored into Redshift data warehouse for final processing and running analytic queries.
+- Data is provided as input in the form of CSV files obtained from [Kaggle](https://www.kaggle.com/san089/goodreads-dataset). 
+- Input data is stored on local disk and then moved to the Ground Store Bucket on AWS S3. 
+- ETL jobs are written in Spark and scheduled in Airflow to run every 10 minutes to process the input data in Ground Store bucket, and move transformed input data to Final Store bucket, from where data is stored into Redshift data warehouse for final processing and running analytic queries.
 
 Below diagram depicts the architecture:
 
