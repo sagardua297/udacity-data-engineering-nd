@@ -13,8 +13,8 @@ Input data files will be stored in S3 buckets.
 
 Three S3 buckets will be used in the project:
 - <i>Ground Store</i>: This bucket stores the input data files.
-- <i>Processintg Store</i>: Input data from Ground Store bucket is moved to Processing Store bucket. Input data is transformed in this bucket
-- <i>Final Store</i>: This bucket stores final version of processed input data, ready to be taken to Redshift data warehouse schema tables for further processing.
+- <i>Processintg Store</i>: Input data from Ground Store bucket is moved to Processing Store bucket. 
+- <i>Final Store</i>: This bucket stores final version of processed input data from Processing Store bucket, ready to be taken to Redshift Staging schema tables for further processing.
 
 <b>2. AWS EMR Cluster</b>
 
@@ -32,9 +32,9 @@ This automates the ETL jobs written in Spark. ETL jobs exeuction can be schedule
 
 - Data is provided as input in the form of CSV files obtained from [Kaggle](https://www.kaggle.com/san089/goodreads-dataset). 
 - Input data is stored on local disk and then moved to the Ground Store Bucket on AWS S3. 
-- ETL jobs are written in Spark and scheduled in Airflow to run every 10 minutes to process the input data in Ground Store bucket, and move transformed input data to Final Store bucket, from where data is stored into Redshift data warehouse for final processing and running analytic queries.
+- ETL jobs are written in Spark and scheduled in Airflow to run every 10 minutes to perform operations and data quality checks on the input data, and move transformed data to Redshift schemas.
 
-Below diagram depicts the architecture:
+Below diagram depicts the platform architecture.
 
 <a href=""><img src="images/Architecture_1.png" align="centre" height="515" width="1600"></a>
 
@@ -44,15 +44,18 @@ Below are steps undertaken during the Data Pipeline flow:
 
 1. Input data files are placed in Ground Store S3 bucket.
 2. S3 module of ETL Spark job copies data from Ground Store bucket to Processing Store bucket.
-3. Once the data is moved to Processing Store bucket, Spark job is triggered which reads the data from Processing Store bucket and applies transformation. 
-4. Dataset is repartitioned and moved to the Final Store bucket.
-5. Warehouse module of ETL Spark job picks up data from Final Store bucket and stages it into the Redshift staging tables.
-6. Using the Redshift staging tables, UPSERT operation is performed on the Data Warehouse tables to update the dataset.
-7. ETL job execution is successfully completed once the Data Warehouse is updated.
-8. Airflow DAG runs the data quality check on all Warehouse tables once the ETL job execution is completed.
-9. Airflow DAG has Analytics queries configured in a Custom Designed Operator. These queries are run and again a Data Quality Check is 
-done on some selected Analytics Table.
-10. DAG execution completes after these Data Quality check.
+3. Once the data is moved to Processing Store bucket, Spark job is triggered which performs the below:
+  - Reads the data from Processing Store bucket and applies transformations to the same.
+  - Copies transformed input data from Processing Store bucket to Final Store bucket.
+  - Create Redshift Staging and Warehouse schemas and their tables respectively.
+5. Warehouse module of ETL Spark job picks up data from Final Store bucket and stages it into the Redshift staging schema tables.
+6. Using the Redshift staging schema tables, UPSERT operation is performed on the data, and moves the same to the Redshift Warehouse schema tables.
+7. ETL job execution is successfully completed once the Redshift Warehouse schema tables are populated.
+8. Airflow DAG performs the below operations next:
+  - Run data quality check on all Redshift Warehouse schema tables once the ETL job execution is completed.
+  - Creates Redshift Analytic schema and its corresponding tables.
+  - Configure Analytics queries in a Custom Designed Operator. These queries are run and again a Data Quality Check is done on selected Redshift Analytics schema tables.
+10. Airflow DAG execution completes after these Data Quality checks on Redshift Analytic schema tables.
 
 ## Host Environment Setup
 
@@ -100,6 +103,35 @@ Below diagram depicts EMR cluster created in AWS.
 Confifure Apache Airflow instance either on local setup or on AWS EC2 instance.
 
 Followed GIT [repo](https://github.com/andresionek91/airflow-autoscaling-ecs) to setup Airflow.
+
+Create below connections from Airflow UI console:
+1. SSH connection to submit ETL Spark jobs.
+  - Open Admin -> Connections -> Create
+  - Enter below information in the various input fields:
+    - Conn Id: emr_ssh_connection
+    - Conn Type: SSH
+    - Host: EMR_Master_Node_IP
+    - Username: hadoop
+    - Password: <Password>
+    - Port: 22
+    - Extra: {
+                "key_file":"<EMR key pair file path>",
+                "timeout":"10",
+                "compress";"false",
+                "no_host_key_check":"true",
+                "allow_host_key_change":"false"
+             }
+  - Click Save.
+2. Redshift connection to access Redshift cluster to create various schemas.
+    - Open Admin -> Connections -> Create.
+    - Enter below information in the various input fields:
+      - Conn Id: redshift
+      - Conn Type: Postgres
+      - Host: <Redshift_Cluster_Endpoint>
+      - Schema: <Redshift_Schema_Name>
+      - Login: <Login_name>
+      - Password: <Login_password>
+      - Port:5439
 
 ## Data Dictionary
 
