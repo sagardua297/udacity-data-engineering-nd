@@ -6,7 +6,7 @@ import configparser
 from warehouse.warehouse_component import DataPipelineWarehouse
 import time
 
-# Setting configurations. Look config.cfg for more details
+# Setup configurations
 config = configparser.ConfigParser()
 config.read_file(open(f"{Path(__file__).parents[0]}/s3_config.cfg"))
 
